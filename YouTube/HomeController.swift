@@ -16,5 +16,9 @@ class HomeController: UICollectionViewController {
         navigationItem.title = "Home"
         collectionView?.backgroundColor = UIColor.white
     }
+    
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 5
+    }
 }
 
