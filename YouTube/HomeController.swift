@@ -68,8 +68,8 @@ class VideoCell: UICollectionViewCell {
     
     let titleLabel: UILabel = {
         let view = UILabel()
-        view.backgroundColor = UIColor.purple
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.text = "Taylor Swift - Blank Space"
         return view
     }()
 
