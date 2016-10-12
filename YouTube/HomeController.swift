@@ -76,7 +76,7 @@ class VideoCell: UICollectionViewCell {
     let subtitleTextView: UITextView = {
         let view = UITextView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.text = "TaylorSwiftVEVO • 1,604,684,607 views • 2 years"
+        view.text = "TaylorSwiftVEVO • 11,604,684,607 views • 2 years ago"
 //        view.textContainerInset = UIEdgeInsets.init(top: 0, left: -4, bottom: 8, right: 0) // from UIEdgeInsetsMake(_:_:_:_:) docs - top, left, bottom, right - default is (8, 0, 8, 0) per textContainerInset docs - values used in the initializer obtained by eyeballing alignment of text with titleLabel
 //        view.textContainer.lineFragmentPadding = 0
 //        view.textContainerInset = UIEdgeInsets.zero
@@ -110,7 +110,7 @@ class VideoCell: UICollectionViewCell {
         addConstraint(NSLayoutConstraint.init(item: subtitleTextView, attribute: .top, relatedBy: .equal, toItem: titleLabel, attribute: .bottom, multiplier: 1, constant: 4))
         addConstraint(NSLayoutConstraint.init(item: subtitleTextView, attribute: .left, relatedBy: .equal, toItem: userProfileImageView, attribute: .right, multiplier: 1, constant: 8))
         addConstraint(NSLayoutConstraint.init(item: subtitleTextView, attribute: .right, relatedBy: .equal, toItem: thumbnailImageView, attribute: .right, multiplier: 1, constant: 0))
-        addConstraint(NSLayoutConstraint.init(item: subtitleTextView, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 0, constant: 20))
+        addConstraint(NSLayoutConstraint.init(item: subtitleTextView, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 0, constant: 30))
 
 
 //         TEMP: use these temporary constraints to help visualize the placement of title label as we add NSLayoutConstraint.init(item:) to titleLabel & subTitleLabel
