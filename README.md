@@ -2,3 +2,6 @@
 
 ## Swift: Lets Build YouTube - Home Feed: UICollectionView, AutoLayout (Ep 1)
 
+We're NOT going to use Storyboards
+
+
