@@ -46,7 +46,6 @@ class VideoCell: UICollectionViewCell {
     
     let thumbnailImageView: UIImageView = {
         let view = UIImageView()
-        view.backgroundColor = UIColor.blue
         view.image = UIImage(named: "taylor-swift-blank-space")
         view.contentMode = .scaleAspectFill
         view.clipsToBounds = true
@@ -55,7 +54,6 @@ class VideoCell: UICollectionViewCell {
     
     let userProfileImageView: UIImageView = {
         let view = UIImageView()
-        view.backgroundColor = UIColor.green
         view.image = UIImage(named: "taylor-swift-profile")
         view.layer.cornerRadius = 22
         view.layer.masksToBounds = true
