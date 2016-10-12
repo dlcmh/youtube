@@ -62,15 +62,34 @@ class VideoCell: UICollectionViewCell {
         return view
     }()
     
+    let titleLabel: UILabel = {
+        let view = UILabel()
+        view.backgroundColor = UIColor.purple
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     func setupViews() {
         addSubview(thumbnailImageView)
         addSubview(separatorView)
         addSubview(userProfileImageView)
+        addSubview(titleLabel)
         
         addConstraints(withFormat: "H:|-16-[v0]-16-|", views: thumbnailImageView)
         addConstraints(withFormat: "H:|-16-[v0(44)]", views: userProfileImageView)
         addConstraints(withFormat: "V:|-16-[v0]-8-[v1(44)]-16-[v2(1)]|", views: thumbnailImageView, userProfileImageView, separatorView)
         addConstraints(withFormat: "H:|[v0]|", views: separatorView)
+        
+        // titleLabel constraints - top, left, right-aligned with right of thumbnailImageView, height
+        addConstraint(NSLayoutConstraint.init(item: titleLabel, attribute: .top, relatedBy: .equal, toItem: thumbnailImageView, attribute: .bottom, multiplier: 1, constant: 8))
+        addConstraint(NSLayoutConstraint.init(item: titleLabel, attribute: .left, relatedBy: .equal, toItem: userProfileImageView, attribute: .right, multiplier: 1, constant: 8))
+        addConstraint(NSLayoutConstraint.init(item: titleLabel, attribute: .right, relatedBy: .equal, toItem: thumbnailImageView, attribute: .right, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint.init(item: titleLabel, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 0, constant: 20))
+
+//         TEMP: use these temporary constraints to help visualize the placement of title label as we add NSLayoutConstraint.init(item:) to titleLabel & subTitleLabel
+//        addConstraints(withFormat: "V:[v0(20)]", views: titleLabel)
+//        addConstraints(withFormat: "H:|[v0]|", views: titleLabel)
+//        END TEMP
     }
     
     required init?(coder aDecoder: NSCoder) {
