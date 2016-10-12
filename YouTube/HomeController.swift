@@ -48,6 +48,8 @@ class VideoCell: UICollectionViewCell {
         let view = UIImageView()
         view.backgroundColor = UIColor.blue
         view.image = UIImage(named: "taylor-swift-blank-space")
+        view.contentMode = .scaleAspectFill
+        view.clipsToBounds = true
         return view
     }()
     
