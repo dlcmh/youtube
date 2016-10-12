@@ -75,8 +75,16 @@ class VideoCell: UICollectionViewCell {
 
     let subtitleTextView: UITextView = {
         let view = UITextView()
-        view.backgroundColor = UIColor.red
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.text = "TaylorSwiftVEVO • 1,604,684,607 views • 2 years"
+//        view.textContainerInset = UIEdgeInsets.init(top: 0, left: -4, bottom: 8, right: 0) // from UIEdgeInsetsMake(_:_:_:_:) docs - top, left, bottom, right - default is (8, 0, 8, 0) per textContainerInset docs - values used in the initializer obtained by eyeballing alignment of text with titleLabel
+//        view.textContainer.lineFragmentPadding = 0
+//        view.textContainerInset = UIEdgeInsets.zero
+        view.textContainerInset = UIEdgeInsets(top: 0, left: -view.textContainer.lineFragmentPadding, bottom: 8, right: 0) // settled on http://stackoverflow.com/questions/746670/how-to-lose-margin-padding-in-uitextview/36827271#36827271 and after reading https://developer.apple.com/library/content/documentation/StringsTextFonts/Conceptual/TextAndWebiPhoneOS/CustomTextProcessing/CustomTextProcessing.html#//apple_ref/doc/uid/TP40009542-CH4-SW1 & https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/TextStorageLayer/Tasks/Region.html
+        view.textColor = UIColor.lightGray
+        // print(view.textContainerInset) // -> UIEdgeInsets(top: 0.0, left: -5.0, bottom: 8.0, right: 0.0)
+//        view.backgroundColor = UIColor.darkGray
+//        view.textColor = UIColor.lightText
         return view
     }()
 
