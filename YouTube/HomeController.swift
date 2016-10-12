@@ -68,12 +68,20 @@ class VideoCell: UICollectionViewCell {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    
+
+    let subtitleTextView: UITextView = {
+        let view = UITextView()
+        view.backgroundColor = UIColor.red
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
     func setupViews() {
         addSubview(thumbnailImageView)
         addSubview(separatorView)
         addSubview(userProfileImageView)
         addSubview(titleLabel)
+        addSubview(subtitleTextView)
         
         addConstraints(withFormat: "H:|-16-[v0]-16-|", views: thumbnailImageView)
         addConstraints(withFormat: "H:|-16-[v0(44)]", views: userProfileImageView)
@@ -85,6 +93,13 @@ class VideoCell: UICollectionViewCell {
         addConstraint(NSLayoutConstraint.init(item: titleLabel, attribute: .left, relatedBy: .equal, toItem: userProfileImageView, attribute: .right, multiplier: 1, constant: 8))
         addConstraint(NSLayoutConstraint.init(item: titleLabel, attribute: .right, relatedBy: .equal, toItem: thumbnailImageView, attribute: .right, multiplier: 1, constant: 0))
         addConstraint(NSLayoutConstraint.init(item: titleLabel, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 0, constant: 20))
+        
+        // subtitleTextView constraints - top, left, right-aligned with right of thumbnailImageView, height
+        addConstraint(NSLayoutConstraint.init(item: subtitleTextView, attribute: .top, relatedBy: .equal, toItem: titleLabel, attribute: .bottom, multiplier: 1, constant: 8))
+        addConstraint(NSLayoutConstraint.init(item: subtitleTextView, attribute: .left, relatedBy: .equal, toItem: userProfileImageView, attribute: .right, multiplier: 1, constant: 8))
+        addConstraint(NSLayoutConstraint.init(item: subtitleTextView, attribute: .right, relatedBy: .equal, toItem: thumbnailImageView, attribute: .right, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint.init(item: subtitleTextView, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 0, constant: 20))
+
 
 //         TEMP: use these temporary constraints to help visualize the placement of title label as we add NSLayoutConstraint.init(item:) to titleLabel & subTitleLabel
 //        addConstraints(withFormat: "V:[v0(20)]", views: titleLabel)
