@@ -54,6 +54,7 @@ class VideoCell: UICollectionViewCell {
     let userProfileImageView: UIImageView = {
         let view = UIImageView()
         view.backgroundColor = UIColor.green
+        view.image = UIImage(named: "taylor-swift-profile")
         return view
     }()
 
