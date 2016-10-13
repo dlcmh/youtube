@@ -15,6 +15,9 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         navigationItem.title = "Home"
         navigationController?.navigationBar.isTranslucent = false
+        
+        // Used http://timdietrich.me/blog/swift-ios-customizing-navigation-and-tab-bar-appearance/ instead of video's use of a custom UILabel that additionally hardcodes a left position for the label - if required, re-visit the video at https://www.youtube.com/watch?v=APQVltARKF8 17:00
+        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
 
         collectionView?.backgroundColor = UIColor.white
         collectionView?.register(VideoCell.self, forCellWithReuseIdentifier: "cellId")
