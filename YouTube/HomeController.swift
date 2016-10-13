@@ -14,6 +14,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         super.viewDidLoad()
         
         navigationItem.title = "Home"
+        navigationController?.navigationBar.isTranslucent = false
 
         collectionView?.backgroundColor = UIColor.white
         collectionView?.register(VideoCell.self, forCellWithReuseIdentifier: "cellId")
