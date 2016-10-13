@@ -13,8 +13,20 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.title = "Home"
+//        navigationItem.title = "Home"
+        navigationController?.navigationBar.isTranslucent = false
+        
+        // http://timdietrich.me/blog/swift-ios-customizing-navigation-and-tab-bar-appearance/ instead of video's use of a custom UILabel that additionally hardcodes a left position for the label - if required, re-visit the video at https://www.youtube.com/watch?v=APQVltARKF8 17:00
+//        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+        
+        // Video's approach for navigationItem "title"
+        let navigationItemTitleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.width - 32, height: view.frame.height))
+        navigationItemTitleLabel.text = "Home"
+        navigationItemTitleLabel.textColor = UIColor.white
+        navigationItemTitleLabel.font = UIFont.systemFont(ofSize: 20)
+        navigationItem.titleView = navigationItemTitleLabel
 
+        // Set up collection view
         collectionView?.backgroundColor = UIColor.white
         collectionView?.register(VideoCell.self, forCellWithReuseIdentifier: "cellId")
     }
@@ -30,99 +42,11 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: 200)
+        let height = (view.frame.width - 16 - 16) * 9 / 16 // 16:9 HD ratio
+        return CGSize(width: view.frame.width, height: height + 16 + 69) // add back vertical space needed by constraints, etc
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
-    }
-}
-
-class VideoCell: UICollectionViewCell {
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupViews()
-    }
-    
-    let thumbnailImageView: UIImageView = {
-        let view = UIImageView()
-        view.backgroundColor = UIColor.blue
-        view.image = UIImage(named: "taylor-swift-blank-space")
-        return view
-    }()
-    
-    let userProfileImageView: UIImageView = {
-        let view = UIImageView()
-        view.backgroundColor = UIColor.green
-        return view
-    }()
-
-    let separatorView: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor.black
-        return view
-    }()
-    
-    let titleLabel: UILabel = {
-        let view = UILabel()
-        view.backgroundColor = UIColor.purple
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-
-    let subtitleTextView: UITextView = {
-        let view = UITextView()
-        view.backgroundColor = UIColor.red
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-
-    func setupViews() {
-        addSubview(thumbnailImageView)
-        addSubview(separatorView)
-        addSubview(userProfileImageView)
-        addSubview(titleLabel)
-        addSubview(subtitleTextView)
-        
-        addConstraints(withFormat: "H:|-16-[v0]-16-|", views: thumbnailImageView)
-        addConstraints(withFormat: "H:|-16-[v0(44)]", views: userProfileImageView)
-        addConstraints(withFormat: "V:|-16-[v0]-8-[v1(44)]-16-[v2(1)]|", views: thumbnailImageView, userProfileImageView, separatorView)
-        addConstraints(withFormat: "H:|[v0]|", views: separatorView)
-        
-        // titleLabel constraints - top, left, right-aligned with right of thumbnailImageView, height
-        addConstraint(NSLayoutConstraint.init(item: titleLabel, attribute: .top, relatedBy: .equal, toItem: thumbnailImageView, attribute: .bottom, multiplier: 1, constant: 8))
-        addConstraint(NSLayoutConstraint.init(item: titleLabel, attribute: .left, relatedBy: .equal, toItem: userProfileImageView, attribute: .right, multiplier: 1, constant: 8))
-        addConstraint(NSLayoutConstraint.init(item: titleLabel, attribute: .right, relatedBy: .equal, toItem: thumbnailImageView, attribute: .right, multiplier: 1, constant: 0))
-        addConstraint(NSLayoutConstraint.init(item: titleLabel, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 0, constant: 20))
-        
-        // subtitleTextView constraints - top, left, right-aligned with right of thumbnailImageView, height
-        addConstraint(NSLayoutConstraint.init(item: subtitleTextView, attribute: .top, relatedBy: .equal, toItem: titleLabel, attribute: .bottom, multiplier: 1, constant: 8))
-        addConstraint(NSLayoutConstraint.init(item: subtitleTextView, attribute: .left, relatedBy: .equal, toItem: userProfileImageView, attribute: .right, multiplier: 1, constant: 8))
-        addConstraint(NSLayoutConstraint.init(item: subtitleTextView, attribute: .right, relatedBy: .equal, toItem: thumbnailImageView, attribute: .right, multiplier: 1, constant: 0))
-        addConstraint(NSLayoutConstraint.init(item: subtitleTextView, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 0, constant: 20))
-
-
-//         TEMP: use these temporary constraints to help visualize the placement of title label as we add NSLayoutConstraint.init(item:) to titleLabel & subTitleLabel
-//        addConstraints(withFormat: "V:[v0(20)]", views: titleLabel)
-//        addConstraints(withFormat: "H:|[v0]|", views: titleLabel)
-//        END TEMP
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-}
-
-extension UIView {
-    func addConstraints(withFormat format: String, views: UIView...) {
-        var viewsDictionary = [String: UIView]()
-        for (index, view) in views.enumerated() {
-            let key = "v\(index)"
-            viewsDictionary[key] = view
-            
-            view.translatesAutoresizingMaskIntoConstraints = false // will get warning on recovery by breaking constraint without this declaration
-        }
-        
-        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: format, options: NSLayoutFormatOptions(), metrics: nil, views: viewsDictionary))
     }
 }
