@@ -9,8 +9,18 @@
 import UIKit
 
 class MenuBar: UIView {
+    let collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        return cv
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
+        addSubview(collectionView)
+        addConstraints(withFormat: "H:|[v0]|", views: collectionView)
+        addConstraints(withFormat: "V:|[v0]|", views: collectionView)
         
         backgroundColor = UIColor.rgb(red: 230, green: 32, blue: 31)
     }
