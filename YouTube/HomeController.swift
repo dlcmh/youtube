@@ -33,14 +33,9 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         // Set up MenuBar
         setupMenuBar()
     }
-    
-    // MenuBar
-    let menuBar: MenuBar = {
-        let mb = MenuBar()
-        return mb
-    }()
 
     private func setupMenuBar() {
+        let menuBar = MenuBar()
         menuBar.translatesAutoresizingMaskIntoConstraints = false
         menuBar.widthAnchor.constraint(equalToConstant: view.frame.width).isActive = true
         menuBar.heightAnchor.constraint(equalToConstant: 50).isActive = true
