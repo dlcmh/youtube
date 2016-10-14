@@ -11,6 +11,7 @@ import UIKit
 class MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     private var collectionViewCellId = "cellId"
+    private var iconNames = ["home", "trending", "subscriptions", "account"]
     
     private func setup() {
         let layout = UICollectionViewFlowLayout()
@@ -20,8 +21,6 @@ class MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UIC
         
         addSubview(collectionView)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-//        addConstraints(withFormat: "H:|[v0]|", views: collectionView)
-//        addConstraints(withFormat: "V:|[v0]|", views: collectionView)
         collectionView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
         collectionView.heightAnchor.constraint(equalTo: heightAnchor).isActive = true
         
@@ -38,7 +37,9 @@ class MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UIC
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: collectionViewCellId, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: collectionViewCellId, for: indexPath) as! MenuCell
+        
+        cell.imageView.image = UIImage(named: iconNames[indexPath.item])
 
         return cell
     }
@@ -70,7 +71,10 @@ class MenuCell: BaseCell {
         setupImageView()
     }
     
-    private let imageView = UIImageView()
+    // MARK: imageView property
+    
+    let imageView = UIImageView()
+
     private func setupImageView() {
         imageView.image = UIImage(named: "home")
         addSubview(imageView)
