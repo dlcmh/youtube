@@ -39,7 +39,7 @@ class MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UIC
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: collectionViewCellId, for: indexPath) as! MenuCell
         
-        cell.imageView.image = UIImage(named: iconNames[indexPath.item])
+        cell.iconName = iconNames[indexPath.item]
 
         return cell
     }
@@ -67,16 +67,25 @@ class MenuCell: BaseCell {
     
     override func setupViews() {
         super.setupViews()
-        
-        setupImageView()
     }
     
-    // MARK: imageView property
+    // MARK: imageView and iconName properties
     
     let imageView = UIImageView()
 
+    var iconName: String = "" {
+        // blank string suggested by Fix-it, otherwise error: class ManuCell has no initializers
+        didSet {
+            setupImageView()
+        }
+    }
+
     private func setupImageView() {
-        imageView.image = UIImage(named: "home")
+        let image = UIImage(named: iconName)?.withRenderingMode(.alwaysTemplate)
+
+        imageView.image = image
+        imageView.tintColor = UIColor.rgb(red: 91, green: 14, blue: 13)
+
         addSubview(imageView)
         
         imageView.translatesAutoresizingMaskIntoConstraints = false
