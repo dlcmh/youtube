@@ -8,7 +8,10 @@
 
 import UIKit
 
-class MenuBar: UIView {
+class MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    
+    private var collectionViewCellId = "cellId"
+    
     private func setup() {
         let layout = UICollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -18,6 +21,25 @@ class MenuBar: UIView {
         addSubview(collectionView)
         addConstraints(withFormat: "H:|[v0]|", views: collectionView)
         addConstraints(withFormat: "V:|[v0]|", views: collectionView)
+        
+        // Data source, delegate
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        
+        // Cell class for collection view
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: collectionViewCellId)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 4
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: collectionViewCellId, for: indexPath)
+        
+        cell.backgroundColor = UIColor.blue // change default color of cells from clear to blue in order to be able to view the cells
+
+        return cell
     }
 
     override init(frame: CGRect) {
