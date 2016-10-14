@@ -19,14 +19,17 @@ class MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UIC
         collectionView.backgroundColor = UIColor.rgb(red: 230, green: 32, blue: 31)
         
         addSubview(collectionView)
-        addConstraints(withFormat: "H:|[v0]|", views: collectionView)
-        addConstraints(withFormat: "V:|[v0]|", views: collectionView)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+//        addConstraints(withFormat: "H:|[v0]|", views: collectionView)
+//        addConstraints(withFormat: "V:|[v0]|", views: collectionView)
+        collectionView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
+        collectionView.heightAnchor.constraint(equalTo: heightAnchor).isActive = true
         
         // Data source, delegate
         collectionView.dataSource = self
         collectionView.delegate = self
         
-        // Cell class for collection view
+        // Register cell class for use in collection view
         collectionView.register(MenuCell.self, forCellWithReuseIdentifier: collectionViewCellId)
     }
     
@@ -71,7 +74,14 @@ class MenuCell: BaseCell {
     private func setupImageView() {
         imageView.image = UIImage(named: "home")
         addSubview(imageView)
-        addConstraints(withFormat: "H:[v0(28)]", views: imageView)
-        addConstraints(withFormat: "V:[v0(28)]", views: imageView)
+        
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        let constraints: [NSLayoutConstraint] = [
+            imageView.widthAnchor.constraint(equalToConstant: CGFloat(28)),
+            imageView.heightAnchor.constraint(equalToConstant: CGFloat(28)),
+            imageView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            imageView.centerYAnchor.constraint(equalTo: centerYAnchor)
+        ]
+        NSLayoutConstraint.activate(constraints)
     }
 }

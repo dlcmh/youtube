@@ -38,10 +38,11 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
 
     private func setupMenuBar() {
         let menuBar = MenuBar()
-        menuBar.translatesAutoresizingMaskIntoConstraints = false
-        menuBar.widthAnchor.constraint(equalToConstant: view.frame.width).isActive = true
-        menuBar.heightAnchor.constraint(equalToConstant: 50).isActive = true
         view.addSubview(menuBar)
+        menuBar.translatesAutoresizingMaskIntoConstraints = false
+//        menuBar.widthAnchor.constraint(equalToConstant: view.frame.width).isActive = true
+        menuBar.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        menuBar.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
     
     // Main Collection View of thumbnails
