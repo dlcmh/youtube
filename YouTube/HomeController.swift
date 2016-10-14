@@ -29,6 +29,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         // Set up collection view
         collectionView?.backgroundColor = UIColor.white
         collectionView?.register(VideoCell.self, forCellWithReuseIdentifier: "cellId")
+        collectionView?.contentInset = UIEdgeInsetsMake(50, 0, 0, 0)
         
         // Set up MenuBar
         setupMenuBar()
@@ -42,7 +43,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         view.addSubview(menuBar)
     }
     
-    // Collection View
+    // Main Collection View of thumbnails
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 5
     }
