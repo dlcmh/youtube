@@ -36,8 +36,6 @@ class MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UIC
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: collectionViewCellId, for: indexPath)
-        
-        cell.backgroundColor = UIColor.blue // change default color of cells from clear to blue in order to be able to view the cells
 
         return cell
     }
@@ -63,9 +61,17 @@ class MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UIC
 
 class MenuCell: BaseCell {
     
-    
-    
     override func setupViews() {
         super.setupViews()
+        
+        setupImageView()
+    }
+    
+    private let imageView = UIImageView()
+    private func setupImageView() {
+        imageView.image = UIImage(named: "home")
+        addSubview(imageView)
+        addConstraints(withFormat: "H:[v0(28)]", views: imageView)
+        addConstraints(withFormat: "V:[v0(28)]", views: imageView)
     }
 }
