@@ -61,12 +61,11 @@ class MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UIC
 }
 
 
-class MenuCell: UICollectionViewCell {
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
+class MenuCell: BaseCell {
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    
+    
+    override func setupViews() {
+        super.setupViews()
     }
 }
