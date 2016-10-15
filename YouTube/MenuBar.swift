@@ -45,8 +45,12 @@ class MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UIC
     
     // See 'Responding to Cell Selection section of the book Programming iOS 9 - Dive Deep into Views, View Controllers and Frameworks.pdf
     // Within the book, search also for didhighligh & didselect
-    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
-        print(indexPath.item) // 0, 1, 2, or 3
+//    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+//        print(indexPath.item) // 0, 1, 2, or 3
+//    }
+    
+    func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
+        collectionView.cellForItem(at: indexPath)?.contentView.tintColor = UIColor.purple
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -81,8 +85,9 @@ class MenuCell: BaseCell {
     override func setupViews() {
         super.setupViews()
     }
-    
-    // MARK: Cell selection
+
+
+    // MARK: Cell is highlighted (tapped)
     
     override var isHighlighted: Bool {
         didSet {
@@ -102,7 +107,7 @@ class MenuCell: BaseCell {
             setupImageView()
         }
     }
-
+    
     private func setupImageView() {
         let image = UIImage(named: iconName)?.withRenderingMode(.alwaysTemplate)
 
