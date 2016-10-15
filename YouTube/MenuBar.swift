@@ -68,6 +68,14 @@ class MenuCell: BaseCell {
     override func setupViews() {
         super.setupViews()
     }
+    
+    // MARK: Cell selection
+    
+    override var isHighlighted: Bool {
+        didSet {
+            print(123) // first 123 on touchDown, second 123 on touchUpInside
+        }
+    }
 
     
     // MARK: imageView and iconName properties
