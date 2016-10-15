@@ -68,6 +68,7 @@ class MenuCell: BaseCell {
     override func setupViews() {
         super.setupViews()
     }
+
     
     // MARK: imageView and iconName properties
     
@@ -86,7 +87,10 @@ class MenuCell: BaseCell {
         imageView.image = image
         imageView.tintColor = UIColor.rgb(red: 91, green: 14, blue: 13)
 
-        addSubview(imageView)
+        // use contentView
+        // https://developer.apple.com/reference/uikit/uicollectionviewcell
+        // http://stackoverflow.com/questions/20927522/adding-a-subview-to-a-uicollectionviewcell-that-takes-up-entire-cell-frame
+        contentView.addSubview(imageView)
         
         imageView.translatesAutoresizingMaskIntoConstraints = false
         let constraints: [NSLayoutConstraint] = [
