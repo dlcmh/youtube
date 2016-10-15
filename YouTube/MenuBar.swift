@@ -36,6 +36,13 @@ class MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UIC
         return 4
     }
     
+    // https://developer.apple.com/reference/uikit/uicollectionviewdelegate
+    // http://stackoverflow.com/questions/26459668/how-to-listen-to-user-touches-for-uicollectionviewcell-in-ios
+    // https://stackoverflow.duapp.com/questions/36487443/why-is-my-uicollectionview-cell-not-clickable-in-my-swift-ios-app
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print(indexPath.item) // 0, 1, 2, or 3
+    }
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: collectionViewCellId, for: indexPath) as! MenuCell
         
