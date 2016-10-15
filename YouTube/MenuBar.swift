@@ -47,6 +47,7 @@ class MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UIC
     // Within the book, search also for didhighligh & didselect
 //    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
 //        print(indexPath.item) // 0, 1, 2, or 3
+//        print(collectionView.cellForItem(at: indexPath)?.contentView.subviews)
 //    }
     
     func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
@@ -87,12 +88,18 @@ class MenuCell: BaseCell {
     }
 
 
-    // MARK: Cell is highlighted (tapped)
+    // MARK: Cell is highlighted (tapped) & selected
     
     override var isHighlighted: Bool {
         didSet {
             imageView.tintColor = isHighlighted ? UIColor.white : UIColor.rgb(red: 91, green: 14, blue: 13)
 //            print(123) // first 123 on touchDown, second 123 on touchUpInside
+        }
+    }
+
+    override var isSelected: Bool {
+        didSet {
+            imageView.tintColor = isSelected ? UIColor.white : UIColor.rgb(red: 91, green: 14, blue: 13)
         }
     }
 
