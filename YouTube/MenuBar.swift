@@ -73,7 +73,8 @@ class MenuCell: BaseCell {
     
     override var isHighlighted: Bool {
         didSet {
-            print(123) // first 123 on touchDown, second 123 on touchUpInside
+            imageView.tintColor = isHighlighted ? UIColor.white : UIColor.rgb(red: 91, green: 14, blue: 13)
+//            print(123) // first 123 on touchDown, second 123 on touchUpInside
         }
     }
 
