@@ -9,29 +9,46 @@
 import UIKit
 
 class MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+
+    lazy var collectionView: UICollectionView = {
+        var cv = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        cv.backgroundColor = UIColor.rgb(red: 230, green: 32, blue: 31)
+        cv.dataSource = self
+        cv.delegate = self
+        return cv
+    }()
+
+    var collectionViewCellId = "cellId"
+    var iconNames = ["home", "trending", "subscriptions", "account"]
     
-    private var collectionViewCellId = "cellId"
-    private var iconNames = ["home", "trending", "subscriptions", "account"]
-    
-    private func setup() {
-        let layout = UICollectionViewFlowLayout()
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        
-        collectionView.backgroundColor = UIColor.rgb(red: 230, green: 32, blue: 31)
-        
-        addSubview(collectionView)
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
-        collectionView.heightAnchor.constraint(equalTo: heightAnchor).isActive = true
-        
-        // Data source, delegate
-        collectionView.dataSource = self
-        collectionView.delegate = self
+
+    // MARK: Initialize and set up the view
+    override init(frame: CGRect) {
+
+        super.init(frame: frame)
         
         // Register cell class for use in collection view
         collectionView.register(MenuCell.self, forCellWithReuseIdentifier: collectionViewCellId)
+        
+        addSubview(collectionView)
+
+        // MARK: View constraints
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
+        collectionView.heightAnchor.constraint(equalTo: heightAnchor).isActive = true
+
+        // MARK: Select the first cell
+//        print(collectionView.indexPathsForSelectedItems) // Optional([])
+        let selectedIndexPath = IndexPath(item: 0, section: 0)
+        collectionView.selectItem(at: selectedIndexPath, animated: false, scrollPosition: [])
+//        print(collectionView.indexPathsForSelectedItems) // Optional([])
+        
     }
     
+    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+//        print(indexPath)
+    }
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 4
     }
@@ -50,9 +67,9 @@ class MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UIC
 //        print(collectionView.cellForItem(at: indexPath)?.contentView.subviews)
 //    }
     
-    func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
-        collectionView.cellForItem(at: indexPath)?.contentView.tintColor = UIColor.purple
-    }
+//    func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
+//        collectionView.cellForItem(at: indexPath)?.contentView.tintColor = UIColor.purple
+//    }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: collectionViewCellId, for: indexPath) as! MenuCell
@@ -68,11 +85,6 @@ class MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UIC
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0
-    }
-
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setup()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -99,6 +111,7 @@ class MenuCell: BaseCell {
 
     override var isSelected: Bool {
         didSet {
+//            print("didSet \(isSelected)")
             imageView.tintColor = isSelected ? UIColor.white : UIColor.rgb(red: 91, green: 14, blue: 13)
         }
     }
@@ -116,10 +129,11 @@ class MenuCell: BaseCell {
     }
     
     private func setupImageView() {
+//        print("432 \(isSelected)")
         let image = UIImage(named: iconName)?.withRenderingMode(.alwaysTemplate)
 
         imageView.image = image
-        imageView.tintColor = UIColor.rgb(red: 91, green: 14, blue: 13)
+        imageView.tintColor = isSelected ? UIColor.white : UIColor.rgb(red: 91, green: 14, blue: 13)
 
         // use contentView
         // https://developer.apple.com/reference/uikit/uicollectionviewcell
