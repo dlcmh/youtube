@@ -26,11 +26,24 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         navigationItemTitleLabel.font = UIFont.systemFont(ofSize: 20)
         navigationItem.titleView = navigationItemTitleLabel
 
-        // Set up collection view
+        // MARK: Set up collection view of video thumbnails
         collectionView?.backgroundColor = UIColor.white
         collectionView?.register(VideoCell.self, forCellWithReuseIdentifier: "cellId")
+        collectionView?.contentInset = UIEdgeInsetsMake(50, 0, 0, 0)
+        collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake(50, 0, 0, 0)
+        
+        // MARK: Set up MenuBar
+        let menuBar = MenuBar()
+        view.addSubview(menuBar)
+        menuBar.translatesAutoresizingMaskIntoConstraints = false
+        menuBar.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        menuBar.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        //        print(menuBar.collectionView.indexPathsForSelectedItems) // Optional([])
+        menuBar.collectionView.selectItem(at: IndexPath(item: 0, section: 0), animated: false, scrollPosition: [])
+        //        print(menuBar.collectionView.indexPathsForSelectedItems) // Optional([])
     }
     
+    // Main Collection View of thumbnails
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 5
     }
